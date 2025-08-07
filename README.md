@@ -1,73 +1,93 @@
-# Welcome to your Lovable project
+# GNS3 Network Automation Platform
 
-## Project info
+A comprehensive network automation platform with direct GNS3 integration for managing VLAN, Firewall, and VPN configurations in real network labs.
 
-**URL**: https://lovable.dev/projects/8b65c9ee-32a0-49f3-8232-281826b14217
+## 🚀 Quick Start
 
-## How can I edit this code?
+### Prerequisites
+- Node.js 18+ and npm
+- GNS3 server running on `http://127.0.0.1:3080`
+- Network devices with SSH access configured
 
-There are several ways of editing your application.
+### Setup
 
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/8b65c9ee-32a0-49f3-8232-281826b14217) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+1. **Install dependencies:**
+```bash
+npm install
 ```
 
-**Edit a file directly in GitHub**
+2. **Configure environment:**
+```bash
+cp .env.example .env
+# Edit .env with your GNS3 and device settings
+```
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+3. **Start GNS3 Lab:**
+   - Open GNS3 GUI
+   - Create/load your network topology
+   - Ensure devices have management IPs (192.168.1.x)
+   - Configure SSH access on devices
 
-**Use GitHub Codespaces**
+4. **Run the application:**
+```bash
+# Development mode (frontend + backend)
+npm run dev:full
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+# Or run separately:
+npm run dev        # Frontend only (port 8080)
+npm run dev:server # Backend only (port 3001)
+```
 
-## What technologies are used for this project?
+## 🔧 Key Features
 
-This project is built with:
+### Real Device Integration
+- Direct SSH connections to GNS3 devices
+- Execute CLI commands on real routers/switches
+- File-based JSON storage (no database required)
+- Live device status monitoring
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+### Network Automation
+- **VLAN Management**: Create/delete VLANs on physical switches
+- **Firewall Rules**: Configure ACLs with real-time statistics
+- **VPN Tunnels**: Site-to-site IPSec automation
+- **Device Management**: Configuration backup and restore
 
-## How can I deploy this project?
+### Modern UI
+- React + TypeScript frontend
+- Dark theme with network-inspired design
+- Real-time WebSocket updates
+- Responsive dashboard with live metrics
 
-Simply open [Lovable](https://lovable.dev/projects/8b65c9ee-32a0-49f3-8232-281826b14217) and click on Share -> Publish.
+## 📡 Architecture
 
-## Can I connect a custom domain to my Lovable project?
+### Backend (Express.js)
+- REST API with device SSH connections
+- JSON file storage in `/data` folder
+- GNS3 server integration
+- JWT authentication
 
-Yes, you can!
+### Default Setup
+- Management IPs: 192.168.1.10-13
+- Default credentials: admin/admin
+- Supports Cisco IOS and pfSense devices
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## 🛠️ Environment Variables
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+```bash
+GNS3_SERVER_URL=http://127.0.0.1:3080
+DEVICE_USERNAME=admin
+DEVICE_PASSWORD=admin
+PORT=3001
+JWT_SECRET=your-secret-key
+```
+
+## 📈 Usage
+
+1. Add your GNS3 devices in Device Management
+2. Test SSH connectivity
+3. Create VLANs through the web interface
+4. Configure firewall rules
+5. Setup VPN tunnels between sites
+6. Monitor real-time network status
+
+Perfect for network labs, training environments, and automated GNS3 topologies!
